@@ -1,0 +1,27 @@
+{
+  "name": "iripvanwinkle/yii2-multi-select",
+  "description": "Multiselect Bootstrap widget for Yii2.",
+  "keywords": [
+    "yii",
+    "extension",
+    "widget",
+    "multiselect"
+  ],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "iRipVanWinkle",
+      "email": "iripvanwinkle@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "*",
+    "bower-asset/bootstrap-multiselect": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "roboapp\\multiselect\\": ""
+    }
+  }
+}
