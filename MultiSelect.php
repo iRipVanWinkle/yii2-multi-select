@@ -27,6 +27,8 @@ class MultiSelect extends InputWidget
      */
     public $clientOptions = [];
 
+    public $containerOptions = [];
+
     /**
      * Initializes the widget.
      */
@@ -45,7 +47,11 @@ class MultiSelect extends InputWidget
     {
         $this->registerPlugin();
 
-        $html = Html::beginTag('div', ['class' => 'input-group']);
+        if ($this->enableResetButton) {
+            Html::addCssClass($this->containerOptions, 'input-group');
+        }
+
+        $html = Html::beginTag('div', $this->containerOptions);
 
         if ($this->hasModel()) {
             $html .= Html::activeDropDownList($this->model, $this->attribute, $this->data, $this->options);
@@ -72,8 +78,8 @@ class MultiSelect extends InputWidget
 
         MultiSelectAsset::register($view);
 
-        if ($this->clientOptions && $this->clientOptions['enableCollapsibleOptGroups']){
-
+        if (isset($this->clientOptions['enableCollapsibleOptGroups']) && $this->clientOptions['enableCollapsibleOptGroups']) {
+            MultiSelectCollapsibleOptGroupsAsset::register($view);
         }
 
         $id = $this->options['id'];
