@@ -94,7 +94,7 @@ class MultiSelect extends InputWidget
     {
         $buttonId = $this->id . '_reset';
 
-        $onclickFunction = "$('#{$this->id} option:selected').each(function() { $(this).prop('selected', false); }); $('#{$this->id}').parents('.form-group').find('input[type=\"hidden\"]').val(''); $('#{$this->id}').multiselect('refresh');";
+        $onclickFunction = "$('#{$this->id}').multiselect('deselectAll', false); $('#{$this->id}').multiselect('updateButtonText');";
 
         return Html::tag('span', Html::a('<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>', null, ['id' => $buttonId, 'onclick' => $onclickFunction, 'class' => 'btn btn-default btn-sm'])
             , ['class' => 'input-group-btn']);
