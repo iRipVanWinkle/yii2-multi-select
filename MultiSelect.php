@@ -4,8 +4,10 @@ namespace roboapp\multiselect;
 
 use Yii;
 use yii\base\InvalidConfigException;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 
 class MultiSelect extends InputWidget
@@ -29,6 +31,8 @@ class MultiSelect extends InputWidget
 
     public $containerOptions = [];
 
+    public $resetButtonOptions = [];
+
     /**
      * Initializes the widget.
      */
@@ -48,7 +52,7 @@ class MultiSelect extends InputWidget
         $this->registerPlugin();
 
         if ($this->enableResetButton) {
-            Html::addCssClass($this->containerOptions, 'input-group');
+            Html::addCssClass($this->containerOptions, 'btn-group');
         }
 
         $html = Html::beginTag('div', $this->containerOptions);
@@ -66,7 +70,6 @@ class MultiSelect extends InputWidget
         $html .= Html::endTag('div');
 
         return $html;
-
     }
 
     /**
@@ -92,11 +95,17 @@ class MultiSelect extends InputWidget
 
     protected function resetButton()
     {
-        $buttonId = $this->id . '_reset';
+        $defaultOptions = [
+            'id' => $this->id . '_reset',
+            'class' => 'btn btn-default',
+            'onclick' => new JsExpression("$('#{$this->id}').multiselect('deselectAll', false); $('#{$this->id}').multiselect('updateButtonText');"),
+        ];
 
-        $onclickFunction = "$('#{$this->id}').multiselect('deselectAll', false); $('#{$this->id}').multiselect('updateButtonText');";
+        $options = ArrayHelper::merge($defaultOptions, $this->resetButtonOptions);
 
-        return Html::tag('span', Html::a('<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>', null, ['id' => $buttonId, 'onclick' => $onclickFunction, 'class' => 'btn btn-default btn-sm'])
-            , ['class' => 'input-group-btn']);
+        $content = ArrayHelper::getValue($options, 'content', HTML::tag('span', null, ['class' => 'glyphicon glyphicon-refresh', 'aria-hidden' => true]));
+
+        return Html::tag('span', $content, $options);
     }
 }
+
