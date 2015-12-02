@@ -103,9 +103,10 @@ class MultiSelect extends InputWidget
 
         $options = ArrayHelper::merge($defaultOptions, $this->resetButtonOptions);
 
-        $content = ArrayHelper::getValue($options, 'content', HTML::tag('span', null, ['class' => 'glyphicon glyphicon-refresh', 'aria-hidden' => true]));
+        $content = ArrayHelper::remove($options, 'content', HTML::tag('span', null, ['class' => 'glyphicon glyphicon-refresh', 'aria-hidden' => true]));
+        $tag = ArrayHelper::remove($options, 'tag', 'span');
 
-        return Html::tag('span', $content, $options);
+        return Html::tag($tag, $content, $options);
     }
 }
 
