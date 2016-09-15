@@ -98,12 +98,12 @@ class MultiSelect extends InputWidget
         $defaultOptions = [
             'id' => $this->id . '_reset',
             'class' => 'btn btn-default',
-            'onclick' => new JsExpression("$('#{$this->id}').multiselect('deselectAll', false); $('#{$this->id}').multiselect('updateButtonText');"),
+            'onclick' => new JsExpression("$('#{$this->id}').multiselect('clearSelection'); $('#{$this->id}').multiselect('select', " . json_encode($this->value) . ");"),
         ];
 
         $options = ArrayHelper::merge($defaultOptions, $this->resetButtonOptions);
 
-        $content = ArrayHelper::remove($options, 'content', HTML::tag('span', null, ['class' => 'glyphicon glyphicon-refresh', 'aria-hidden' => true]));
+        $content = ArrayHelper::remove($options, 'content', Html::tag('span', null, ['class' => 'glyphicon glyphicon-refresh', 'aria-hidden' => true]));
         $tag = ArrayHelper::remove($options, 'tag', 'span');
 
         return Html::tag($tag, $content, $options);
