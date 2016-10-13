@@ -9,7 +9,7 @@ class MultiSelectCollapsibleOptGroupsAsset extends AssetBundle
     public $sourcePath = '@bower/bootstrap-multiselect/dist';
 
     public $js = [
-        'js/bootstrap-multiselect-collapsible-groups.js'
+        'js/bootstrap-multiselect-collapsible-groups.js',
     ];
 
     public $depends = [

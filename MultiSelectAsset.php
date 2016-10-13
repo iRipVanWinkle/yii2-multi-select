@@ -13,11 +13,11 @@ class MultiSelectAsset extends AssetBundle
     ];
 
     public $js = [
-        'js/bootstrap-multiselect.js'
+        'js/bootstrap-multiselect.js',
     ];
 
     public $depends = [
         'yii\web\JqueryAsset',
-        'yii\bootstrap\BootstrapPluginAsset'
+        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }
