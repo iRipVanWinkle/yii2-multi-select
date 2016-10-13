@@ -2,7 +2,6 @@
 
 namespace roboapp\multiselect;
 
-use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -24,7 +23,8 @@ class MultiSelect extends InputWidget
 
     /**
      * @var array the options for the Bootstrap Multiselect JS plugin.
-     * Please refer to the Bootstrap Multiselect plugin Web page for possible options.
+     *            Please refer to the Bootstrap Multiselect plugin Web page for possible options.
+     *
      * @see http://davidstutz.github.io/bootstrap-multiselect/#options
      */
     public $clientOptions = [];
@@ -45,7 +45,7 @@ class MultiSelect extends InputWidget
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function run()
     {
@@ -73,7 +73,7 @@ class MultiSelect extends InputWidget
     }
 
     /**
-     * Registers MultiSelect Bootstrap plugin and the related events
+     * Registers MultiSelect Bootstrap plugin and the related events.
      */
     protected function registerPlugin()
     {
@@ -96,9 +96,9 @@ class MultiSelect extends InputWidget
     protected function resetButton()
     {
         $defaultOptions = [
-            'id' => $this->id . '_reset',
-            'class' => 'btn btn-default',
-            'onclick' => new JsExpression("$('#{$this->id}').multiselect('clearSelection'); $('#{$this->id}').multiselect('select', " . json_encode($this->value) . ");"),
+            'id'      => $this->id.'_reset',
+            'class'   => 'btn btn-default',
+            'onclick' => new JsExpression("$('#{$this->id}').multiselect('clearSelection'); $('#{$this->id}').multiselect('select', ".json_encode($this->value).');'),
         ];
 
         $options = ArrayHelper::merge($defaultOptions, $this->resetButtonOptions);
@@ -109,4 +109,3 @@ class MultiSelect extends InputWidget
         return Html::tag($tag, $content, $options);
     }
 }
-
